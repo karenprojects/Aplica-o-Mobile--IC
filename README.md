@@ -13,8 +13,24 @@
 
 ## 🚀 How to use
 
+Clone o repositório:
 ```sh
-npx create-expo --example with-typescript
+git clone https://github.com/seu-usuario/news-verification-app.git
+```
+
+Navegue até o diretório do projeto:
+```sh
+cd login-frontend
+```
+
+Instale as dependências:
+```sh
+npm install
+```
+
+Execute o projeto:
+```sh
+npm run start
 ```
 
 #### Creating a new project
