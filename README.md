@@ -1,7 +1,7 @@
 # News Verification App
 
 <p>
-  Este é um aplicativo de verificação de notícias desenvolvido em **React Native**. O aplicativo permite que o usuário insira uma notícia para verificar sua autenticidade. A resposta simula uma verificação automática, retornando se a notícia está correta (exibido em verde) ou incorreta (exibido em vermelho).
+  Este é um aplicativo de verificação de notícias desenvolvido em React Native. O aplicativo permite que o usuário insira uma notícia para verificar sua autenticidade. A resposta simula uma verificação automática, retornando se a notícia está correta (exibido em verde) ou incorreta (exibido em vermelho).
 
 </p>
 
