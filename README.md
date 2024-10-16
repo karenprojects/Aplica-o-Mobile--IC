@@ -34,5 +34,3 @@ Execute o projeto:
 npm run start
 ```
 
-
-- [Expo TypeScript guide](https://docs.expo.dev/versions/latest/guides/typescript/)
