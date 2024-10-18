@@ -2,15 +2,26 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
+import ResultadoScreen from './src/screens/ResultadoScreen';
 
-const Stack = createNativeStackNavigator();
+type RootStackParamList = {
+  Home: undefined;
+  ResultadoScreen: { newsText: string };
+};
 
-export default function App() {
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const App: React.FC = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Avaliação de Veracidade">
-        <Stack.Screen name="Avaliação de Veracidade" component={HomeScreen} />
+      <Stack.Navigator>
+        {/* Desativando o cabeçalho para a tela Home */}
+        <Stack.Screen name= "Home" component={HomeScreen} options={{ headerShown: false }}
+        />
+        <Stack.Screen name="ResultadoScreen" component={ResultadoScreen} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;
