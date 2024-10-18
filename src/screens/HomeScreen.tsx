@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  View, 
-  TextInput, 
-  TouchableOpacity, 
-  Text, 
-  StyleSheet 
+import { View, TextInput, TouchableOpacity, Text, StyleSheet 
 } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { NativeBaseProvider } from 'native-base';
@@ -98,12 +93,19 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 50,
     borderRadius: 8,
+    width: '18%',
+    marginBottom: 20,
   },
   buttonText: {
     color: '#FFF',
     fontSize: 16,
+    textAlign: 'center', // Centraliza o texto do botão
     fontWeight: 'bold',
   },
+  orText: {
+    color: '#AAA',
+    fontSize: 14,
+    marginBottom: 20,
+  },
 });
-
 export default HomeScreen;

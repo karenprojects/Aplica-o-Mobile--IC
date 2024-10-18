@@ -1,10 +1,11 @@
-import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AntDesign } from '@expo/vector-icons'; // Para ícones de verificação
 
 type RootStackParamList = {
   ResultadoVerificacao: { tipoResultado: string };
+  ComentarioScreen: undefined; // Definindo a rota ComentarioScreen
+  Home: undefined; // Definindo a rota Home
 };
 
 type ResultadoVerificacaoProps = NativeStackScreenProps<
@@ -20,64 +21,63 @@ const ResultadoVerificacaoScreen: React.FC<ResultadoVerificacaoProps> = ({
 
   // Define o ícone com base no tipo de resultado
   const renderIcon = () => {
-    if (tipoResultado === 'sim') {
-      return <AntDesign name="checkcircle" size={64} color="green" />;
-    } else if (tipoResultado === 'falso') {
-      return <AntDesign name="closecircle" size={64} color="red" />;
-    } else {
-      return <AntDesign name="questioncircle" size={64} color="gray" />;
+    switch (tipoResultado) {
+      case 'sim':
+        return <AntDesign name="checkcircle" size={64} color="green" />;
+      case 'falso':
+        return <AntDesign name="closecircle" size={64} color="red" />;
+      default:
+        return <AntDesign name="questioncircle" size={64} color="gray" />;
     }
   };
 
   // Texto explicativo com base no resultado
   const renderExplanation = () => {
-    if (tipoResultado === 'sim') {
-      return 'Explicação sobre por que a notícia é considerada verdadeira, incluindo fontes e evidências.';
-    } else if (tipoResultado === 'falso') {
-      return 'Explicação sobre por que a notícia é considerada falsa, incluindo fontes e evidências.';
-    } else {
-      return 'Nenhuma notícia disponível para verificação.';
+    switch (tipoResultado) {
+      case 'sim':
+        return 'Explicação sobre por que a notícia é considerada verdadeira, incluindo fontes e evidências.';
+      case 'falso':
+        return 'Explicação sobre por que a notícia é considerada falsa, incluindo fontes e evidências.';
+      default:
+        return 'Nenhuma notícia disponível para verificação.';
     }
   };
 
   const openLink = () => {
-    // Substitua a URL pelo link desejado
     Linking.openURL('https://example.com/fonte-de-verificacao');
   };
 
   return (
     <View style={styles.container}>
-      {/* Texto no canto superior direito */}
       <Text style={styles.headerText}>Chill Tech News</Text>
 
-      {/* Linha horizontal abaixo do cabeçalho */}
       <View style={styles.headerLine} />
 
-      {/* Centraliza o título */}
       <Text style={styles.titleText}>Avaliação de Veracidade</Text>
 
       <View style={styles.iconContainer}>{renderIcon()}</View>
 
       <Text style={styles.explanationText}>{renderExplanation()}</Text>
 
-      {/* Link para fontes */}
       <TouchableOpacity onPress={openLink}>
         <Text style={styles.linkText}>
           Links para as fontes que confirmam ou desmentem a notícia
         </Text>
       </TouchableOpacity>
 
-      {/* Botões de ação */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('ComentarioScreen')} // Navegando para a tela ComentarioScreen
+        >
           <Text style={styles.buttonText}>Faça um comentário</Text>
         </TouchableOpacity>
 
         <Text style={styles.orText}>OU</Text>
 
         <TouchableOpacity
-          style={[styles.button, styles.secondaryButton]}
-          onPress={() => navigation.goBack()}
+          style={[styles.button, styles.secondaryButton]} // Aplique o estilo secundário aqui
+          onPress={() => navigation.navigate('Home')} // Navegando para a tela Home
         >
           <Text style={styles.buttonText}>Verificar OUTRA notícia</Text>
         </TouchableOpacity>
@@ -106,12 +106,12 @@ const styles = StyleSheet.create({
     marginTop: 80,
   },
   titleText: {
-    fontSize: 25, // Tamanho da fonte
+    fontSize: 25,
     fontWeight: '400',
     marginBottom: 20,
     color: '#888',
     textAlign: 'center',
-    marginTop: 60, // Mantendo a margem superior para espaçamento
+    marginTop: 60,
   },
   iconContainer: {
     marginBottom: 20,
@@ -129,19 +129,22 @@ const styles = StyleSheet.create({
     color: '#6A6A6A',
     textAlign: 'center',
     textDecorationLine: 'underline',
-    marginBottom: 60, // Aumentando a margem inferior para afastar os botões
+    marginBottom: 60,
   },
   buttonContainer: {
     width: '100%',
-    alignItems: 'center', // Alinha os botões ao centro
+    alignItems: 'center',
   },
   button: {
     backgroundColor: '#7D5A5A',
     paddingVertical: 15,
     paddingHorizontal: 50,
     borderRadius: 8,
+    width: '18%', // Aumentei a largura para melhor visualização
     marginBottom: 20,
-    width: '30%', // Definindo a largura para 30%
+  },
+  secondaryButton: {
+    backgroundColor: '#BFAFAF', // Cor diferente para o segundo botão
   },
   buttonText: {
     color: '#FFF',
@@ -153,9 +156,6 @@ const styles = StyleSheet.create({
     color: '#AAA',
     fontSize: 14,
     marginBottom: 20,
-  },
-  secondaryButton: {
-    backgroundColor: '#A88F8F', // Cor alterada para um marrom mais claro
   },
 });
 
